@@ -1,0 +1,5 @@
+BMAC_SIGNING_SECRET="SECRET"
+DISCORD_WEBHOOK_URL="TOKEN_URL"
+
+Replace the placeholders with your actual BMAC_SIGNING_SECRET and DISCORD_WEBHOOK_URL.
+Make sure the new .dev.vars file is part of your .gitignore :D
