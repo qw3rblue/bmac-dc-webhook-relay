@@ -18,26 +18,11 @@ Built with JavaScript and Cloudflare Workers. This is 100% free, no need for ser
 - **Serverless Architecture (Cloudflare Workers)**
 - **Easy Customization (Ofcourse)**
 
-## 🔄 How It Works
+## How It Works
 
-```text
-       Buy Me a Coffee
-              |
-              | Webhook Event (JSON)
-              v
-      Cloudflare Worker
-              |
-              | Verify Signature
-              | Validate Event
-              | Format Message
-              v
-        Discord Webhook
-              |
-              v
-      Your Discord Channel
-```
-
-Buy Me a Coffee sends an event to your Cloudflare Worker. The Worker verifies the request, processes the event, and forwards a formatted notification to your Discord channel.
+**BMAC -> Webhook Event -> Cloudflare Worker (1/3)**
+**Cloudflare Worker -> Verify Signature, Validate Event, Format Message (2/3)**
+**Discord Webhook -> Display Formatted Message (3/3)**
 
 ### Supported Events
 
