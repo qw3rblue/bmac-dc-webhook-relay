@@ -20,9 +20,9 @@ Built with JavaScript and Cloudflare Workers. This is 100% free, no need for ser
 
 ## How It Works
 
-**BMAC -> Webhook Event -> Cloudflare Worker (1/3)**
-**Cloudflare Worker -> Verify Signature, Validate Event, Format Message (2/3)**
-**Discord Webhook -> Display Formatted Message (3/3)**
+- **BMAC -> Webhook Event -> Cloudflare Worker (1/3)**
+- **Cloudflare Worker -> Verify Signature, Validate Event, Format Message (2/3)**
+- **Discord Webhook -> Display Formatted Message (3/3)**
 
 ### Supported Events
 
