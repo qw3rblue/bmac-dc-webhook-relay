@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "wrangler dev --config wrangler.local.toml",
-    "deploy": "wrangler deploy --config wrangler.local.toml"
+    "deploy": "wrangler deploy --config wrangler.local.toml",
+    "dupetest": "node tests/test-dupe.cjs"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
