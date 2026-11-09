@@ -17,12 +17,13 @@ Built with JavaScript and Cloudflare Workers. This is 100% free, no need for ser
 - **Signature Verification (HMAC-SHA256)**
 - **Serverless Architecture (Cloudflare Workers)**
 - **Easy Customization (Ofcourse)**
+- **Dupe Event Protection (Cloudflare KV)**
 
 ## How It Works
 
 - **BMAC -> Webhook Event -> Cloudflare Worker (1/3)**
-- **Cloudflare Worker -> Verify Signature, Validate Event, Format Message (2/3)**
-- **Discord Webhook -> Display Formatted Message (3/3)**
+- **Cloudflare Worker -> Verify Signature, Dupe Check in KV, Validate Event, Format Message (2/3)**
+- **Discord Webhook -> Display Formatted Message, KV stored for 24 hours (3/3)**
 
 ### Supported Events
 
@@ -33,6 +34,10 @@ Built with JavaScript and Cloudflare Workers. This is 100% free, no need for ser
 | `recurring_donation.started` | New Monthly Supporter |
 
 It will NOT work if the event names are mismatched! You can double check this in the JSON that BMAC generates.
+
+## Limitations
+
+Cloudflare KV is eventually consistent. Having requests happen simultaneously may still produce duplicate messages, and failures between the two services may also produce duplicate messages. The event duplication protection feature is a best-effort solution rather than a guaranteed single delivery. However, to keep things simple I decided to keep it as is and it may be a rare occurrence for two users of your BMAC page to donate at the exact same time.
 
 ---
 
@@ -88,6 +93,22 @@ Authenticate with Cloudflare:
 
 ```bash
 npx wrangler login
+```
+
+Create a KV namespace:
+
+```bash
+npx wrangler kv namespace create WEBHOOK_EVENTS
+```
+
+Configure wrangler.toml:
+
+Do this by copying `wrangler.example.toml` to your `wrangler.toml`, then insert your namespace ID:
+
+```toml
+[[kv_namespaces]]
+binding = "WEBHOOK_EVENTS"
+id = "YOUR_KV_NAMESPACE_ID" # replace with your generated namespace ID
 ```
 
 Deploy your worker:
