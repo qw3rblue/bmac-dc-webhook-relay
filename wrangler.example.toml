@@ -1,0 +1,7 @@
+name = "bmac-discord-relay"
+main = "src/index.js"
+compatibility_date = "2026-11-08"
+
+[[kv_namespaces]]
+binding = "WEBHOOK_EVENTS"
+id = "your_kv_namespace_id"

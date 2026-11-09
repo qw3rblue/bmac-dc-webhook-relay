@@ -59,6 +59,24 @@ export default {
             });
         }
 
+        const eventId = event.id;
+
+        if (!eventId) {
+            return new Response("Missing event ID", {
+                status: 400
+            });
+        }
+
+        const key = `bmac:${eventId}`;
+
+        const existing = await env.WEBHOOK_EVENTS.get(key);
+
+        if (existing) {
+            return new Response("Duplicate event ignored", {
+                status: 200
+            });
+        }
+
         let payload;
 
         try {
@@ -85,6 +103,10 @@ export default {
                     status: 502
                 });
             }
+
+            await env.WEBHOOK_EVENTS.put(key, "processed", {
+                expirationTtl: 86400
+            });
 
             return new Response("OK", {
                 status: 200

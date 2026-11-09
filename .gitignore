@@ -8,3 +8,4 @@ node_modules/
 .wrangler/
 .vscode/
 .DS_Store
+wrangler.local.toml
